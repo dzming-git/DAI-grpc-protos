@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package serviceCoordinate;
+package serviceCoordinator;
 
 service Communicate {
     rpc informPreviousServiceInfo(InformPreviousServiceInfoRequest) returns (InformPreviousServiceInfoResponse) {}
