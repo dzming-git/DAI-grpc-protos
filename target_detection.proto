@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package targetDetection;
+
+service Communicate {
+    rpc registerTargetDetectionsService(RegisterTargetDetectionsServiceRequest) returns (RegisterTargetDetectionsServiceResponse) {}
+    rpc unregisterTargetDetectionsService(UnregisterTargetDetectionsServiceRequest) returns (UnregisterTargetDetectionsServiceResponse) {}
+    rpc loadModel(LoadModelRequest) returns (LoadModelResponse) {}
+    rpc unloadModel(UnloadModelRequest) returns (UnloadModelResponse) {}
+    rpc getResultMappingTable(GetResultMappingTableRequest) returns (GetResultMappingTableResponse) {}
+    rpc getResultIndex(GetResultIndexRequest) returns (GetResultIndexResponse) {}
+}
+
+message NullRequest {}
+message NullResponse {}
+
+// 每次通信的状态
+message CustomResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+message RegisterTargetDetectionsServiceRequest {
+    message Argument {
+        string key = 1;
+        string value = 2;
+    }
+    string imgType = 1;
+    repeated Argument args = 2;
+}
+
+message RegisterTargetDetectionsServiceResponse {
+    CustomResponse response = 1;
+    int64 connectId = 2;
+}
+
+
+message UnregisterTargetDetectionsServiceRequest {
+    int64 connectId = 1;
+}
+
+message UnregisterTargetDetectionsServiceResponse {
+    CustomResponse response = 1;
+}
+
+message LoadModelRequest {
+    int64 connectId = 1;
+    string model = 2;
+}
+
+message LoadModelResponse {
+    CustomResponse response = 1;
+}
+
+message UnloadModelRequest {
+    int64 connectId = 1;
+}
+
+message UnloadModelResponse {
+    CustomResponse response = 1;
+}
+
+message GetResultMappingTableRequest {
+
+}
+
+message GetResultMappingTableResponse {
+    CustomResponse response = 1;
+    repeated string labels = 2;
+}
+
+message GetResultIndexRequest {
+    // 连接ID
+    int64 connectId = 1;
+}
+
+message GetResultIndexResponse {
+    message Result {
+        int32 labelId = 1;
+        double confidence = 2;
+        double x1 = 3;
+        double y1 = 4;
+        double x2 = 5;
+        double y2 = 6;
+    }
+    CustomResponse response = 1;
+    repeated Result results = 2;
+}
