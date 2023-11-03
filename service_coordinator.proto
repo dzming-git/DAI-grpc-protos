@@ -4,6 +4,7 @@ package serviceCoordinator;
 
 service Communicate {
     rpc informPreviousServiceInfo(InformPreviousServiceInfoRequest) returns (InformPreviousServiceInfoResponse) {}
+    rpc informCurrentServiceInfo(InformCurrentServiceInfoRequest) returns (InformCurrentServiceInfoResponse) {}
 }
 
 message NullRequest {}
@@ -26,10 +27,18 @@ message InformPreviousServiceInfoRequest {
     string preServiceName = 2;
     string preServiceIp = 3;
     string preServicePort = 4;
-    repeated Argument args = 5;
 }
 
 message InformPreviousServiceInfoResponse {
+    CustomResponse response = 1;
+}
+
+message InformCurrentServiceInfoRequest {
+    int64 taskId = 1;
+    repeated Argument args = 2;
+}
+
+message InformCurrentServiceInfoResponse {
     CustomResponse response = 1;
     repeated Argument args = 2;
 }
