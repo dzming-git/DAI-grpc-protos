@@ -17,6 +17,12 @@ message CustomResponse {
   string message = 2;
 }
 
+// KV格式参数
+message Argument {
+    string key = 1;
+    string value = 2;
+}
+
 message UnregisterImgTransServiceRequest {
     int64 connectId = 1;
 }
@@ -26,10 +32,6 @@ message UnregisterImgTransServiceResponse {
 }
 
 message RegisterImgTransServiceRequest {
-    message Argument {
-        string key = 1;
-        string value = 2;
-    }
     string imgType = 1;
     repeated Argument args = 2;
 }
