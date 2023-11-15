@@ -44,13 +44,15 @@ message RegisterImgTransServiceResponse {
 message GetImgRequest {
     // 连接ID
     int64 connectId = 1;
+    // 图片ID 如果该参数不为0则调取历史记录
+    int64 imgId = 2;
     // 图像压缩格式
-    string format = 2;
+    string format = 3;
     // 图像压缩参数
-    repeated int32 params = 3;
+    repeated int32 params = 4;
     // 图像的期望大小
-    int32 expectedW = 4;
-    int32 expectedH = 5;
+    int32 expectedW = 5;
+    int32 expectedH = 6;
 }
 
 message GetImgResponse {
