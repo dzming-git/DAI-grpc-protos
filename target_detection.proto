@@ -31,12 +31,12 @@ message RegisterTargetDetectionsServiceRequest {
 
 message RegisterTargetDetectionsServiceResponse {
     CustomResponse response = 1;
-    int64 connectId = 2;
+    int64 taskId = 2;
 }
 
 
 message UnregisterTargetDetectionsServiceRequest {
-    int64 connectId = 1;
+    int64 taskId = 1;
 }
 
 message UnregisterTargetDetectionsServiceResponse {
@@ -44,7 +44,7 @@ message UnregisterTargetDetectionsServiceResponse {
 }
 
 message LoadModelRequest {
-    int64 connectId = 1;
+    int64 taskId = 1;
 }
 
 message LoadModelResponse {
@@ -52,7 +52,7 @@ message LoadModelResponse {
 }
 
 message UnloadModelRequest {
-    int64 connectId = 1;
+    int64 taskId = 1;
 }
 
 message UnloadModelResponse {
@@ -60,7 +60,7 @@ message UnloadModelResponse {
 }
 
 message GetResultMappingTableRequest {
-
+    int64 taskId = 1;
 }
 
 message GetResultMappingTableResponse {
@@ -69,6 +69,7 @@ message GetResultMappingTableResponse {
 }
 
 message GetResultIndexRequest {
+    int64 taskId = 1;
     int64 imgId = 1;
 }
 
