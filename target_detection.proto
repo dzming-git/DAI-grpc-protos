@@ -70,7 +70,7 @@ message GetResultMappingTableResponse {
 
 message GetResultIndexRequest {
     int64 taskId = 1;
-    int64 imgId = 2;
+    int64 imageId = 2;
 }
 
 message GetResultIndexResponse {
