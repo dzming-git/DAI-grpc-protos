@@ -5,7 +5,8 @@ package imageHarmony;
 service Communicate {
     rpc registerImgTransService(RegisterImgTransServiceRequest) returns (RegisterImgTransServiceResponse) {}
     rpc unregisterImgTransService(UnregisterImgTransServiceRequest) returns (UnregisterImgTransServiceResponse) {}
-    rpc getImg(GetImgRequest) returns (GetImgResponse) {}
+    rpc getImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
+    rpc getNextImageByImageId(GetNextImageByImageIdRequest) returns (GetNextImageByImageIdResponse) {}
 }
 
 message NullRequest {}
@@ -41,11 +42,11 @@ message RegisterImgTransServiceResponse {
     int64 connectId = 2;
 }
 
-message GetImgRequest {
+message GetImageByImageIdRequest {
     // 连接ID
     int64 connectId = 1;
     // 图片ID 如果该参数不为0则调取历史记录
-    int64 imgId = 2;
+    int64 imageId = 2;
     // 图像压缩格式
     string format = 3;
     // 图像压缩参数
@@ -55,10 +56,32 @@ message GetImgRequest {
     int32 expectedH = 6;
 }
 
-message GetImgResponse {
+message GetImageByImageIdResponse {
     CustomResponse response = 1;
     int32 w = 2;
     int32 h = 3;
     int64 imgId = 4;
+    bytes buf = 5;
+}
+
+message GetNextImageByImageIdRequest {
+    // 连接ID
+    int64 connectId = 1;
+    // 图片ID 如果该参数不为0则调取历史记录
+    int64 imageId = 2;
+    // 图像压缩格式
+    string format = 3;
+    // 图像压缩参数
+    repeated int32 params = 4;
+    // 图像的期望大小
+    int32 expectedW = 5;
+    int32 expectedH = 6;
+}
+
+message GetNextImageByImageIdResponse {
+    CustomResponse response = 1;
+    int32 w = 2;
+    int32 h = 3;
+    int64 imageId = 4;
     bytes buf = 5;
 }
