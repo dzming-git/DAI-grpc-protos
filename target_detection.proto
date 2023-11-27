@@ -94,5 +94,6 @@ message GetLatestResultIndexRequest {
 
 message GetLatestResultIndexResponse {
     CustomResponse response = 1;
-    repeated Result results = 2;
+    int64 imageId = 2;
+    repeated Result results = 3;
 }
