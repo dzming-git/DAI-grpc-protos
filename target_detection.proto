@@ -8,7 +8,8 @@ service Communicate {
     rpc loadModel(LoadModelRequest) returns (LoadModelResponse) {}
     rpc unloadModel(UnloadModelRequest) returns (UnloadModelResponse) {}
     rpc getResultMappingTable(GetResultMappingTableRequest) returns (GetResultMappingTableResponse) {}
-    rpc getResultIndex(GetResultIndexRequest) returns (GetResultIndexResponse) {}
+    rpc getResultIndexByImageId(GetResultIndexByImageIdRequest) returns (GetResultIndexByImageIdResponse) {}
+    rpc getLatestResultIndex(GetLatestResultIndexRequest) returns (GetLatestResultIndexResponse) {}
 }
 
 message NullRequest {}
@@ -18,6 +19,15 @@ message NullResponse {}
 message CustomResponse {
   int32 code = 1;
   string message = 2;
+}
+
+message Result {
+    int32 labelId = 1;
+    double confidence = 2;
+    double x1 = 3;
+    double y1 = 4;
+    double x2 = 5;
+    double y2 = 6;
 }
 
 message RegisterTargetDetectionsServiceRequest {
@@ -68,20 +78,21 @@ message GetResultMappingTableResponse {
     repeated string labels = 2;
 }
 
-message GetResultIndexRequest {
+message GetResultIndexByImageIdRequest {
     int64 taskId = 1;
     int64 imageId = 2;
 }
 
-message GetResultIndexResponse {
-    message Result {
-        int32 labelId = 1;
-        double confidence = 2;
-        double x1 = 3;
-        double y1 = 4;
-        double x2 = 5;
-        double y2 = 6;
-    }
+message GetResultIndexByImageIdResponse {
+    CustomResponse response = 1;
+    repeated Result results = 2;
+}
+
+message GetLatestResultIndexRequest {
+    int64 taskId = 1;
+}
+
+message GetLatestResultIndexResponse {
     CustomResponse response = 1;
     repeated Result results = 2;
 }
