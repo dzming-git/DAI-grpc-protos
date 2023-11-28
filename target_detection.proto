@@ -81,6 +81,8 @@ message GetResultMappingTableResponse {
 message GetResultIndexByImageIdRequest {
     int64 taskId = 1;
     int64 imageId = 2;
+    // 如果wait为true且imageId找不到，则尝试去向图像源申请该图像并检测，等待检测结束返回结果
+    bool wait = 3;
 }
 
 message GetResultIndexByImageIdResponse {
