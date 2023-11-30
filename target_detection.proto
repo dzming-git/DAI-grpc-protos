@@ -6,6 +6,7 @@ service Communicate {
     rpc registerTargetDetectionsService(RegisterTargetDetectionsServiceRequest) returns (RegisterTargetDetectionsServiceResponse) {}
     rpc unregisterTargetDetectionsService(UnregisterTargetDetectionsServiceRequest) returns (UnregisterTargetDetectionsServiceResponse) {}
     rpc loadModel(LoadModelRequest) returns (LoadModelResponse) {}
+    rpc checkModelState(CheckModelStateRequest) returns (CheckModelStateResponse) {}
     rpc unloadModel(UnloadModelRequest) returns (UnloadModelResponse) {}
     rpc getResultMappingTable(GetResultMappingTableRequest) returns (GetResultMappingTableResponse) {}
     rpc getResultIndexByImageId(GetResultIndexByImageIdRequest) returns (GetResultIndexByImageIdResponse) {}
@@ -28,6 +29,14 @@ message Result {
     double y1 = 4;
     double x2 = 5;
     double y2 = 6;
+}
+
+// 模型的状态
+enum ModelState {
+    NotSet = 0;
+    NotLoaded = 1;
+    Loading = 2;
+    LoadingCompleted = 3;
 }
 
 message RegisterTargetDetectionsServiceRequest {
@@ -59,6 +68,15 @@ message LoadModelRequest {
 
 message LoadModelResponse {
     CustomResponse response = 1;
+}
+
+message CheckModelStateRequest {
+    int64 taskId = 1;
+}
+
+message CheckModelStateResponse {
+    CustomResponse response = 1;
+    ModelState modelState = 2;
 }
 
 message UnloadModelRequest {
