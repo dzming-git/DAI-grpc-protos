@@ -76,6 +76,8 @@ message GetNextImageByImageIdRequest {
     // 图像的期望大小
     int32 expectedW = 5;
     int32 expectedH = 6;
+    // 不获取图像，只获取ID
+    bool onlyImageId = 7;
 }
 
 message GetNextImageByImageIdResponse {
