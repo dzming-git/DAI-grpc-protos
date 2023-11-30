@@ -33,10 +33,10 @@ message Result {
 
 // 模型的状态
 enum ModelState {
-    NotSet = 3;
-    NotLoaded = 2;
-    Loading = 1;
     LoadingCompleted = 0;
+    Loading = 1;
+    NotLoaded = 2;
+    NotSet = 3;
 }
 
 message RegisterTargetDetectionsServiceRequest {
