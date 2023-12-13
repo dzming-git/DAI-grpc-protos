@@ -3,8 +3,8 @@ syntax = "proto3";
 package imageHarmony;
 
 service Communicate {
-    rpc registerImgTransService(RegisterImgTransServiceRequest) returns (RegisterImgTransServiceResponse) {}
-    rpc unregisterImgTransService(UnregisterImgTransServiceRequest) returns (UnregisterImgTransServiceResponse) {}
+    rpc registerImageTransService(RegisterImageTransServiceRequest) returns (RegisterImageTransServiceResponse) {}
+    rpc unregisterImageTransService(UnregisterImageTransServiceRequest) returns (UnregisterImageTransServiceResponse) {}
     rpc getImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
     rpc getNextImageByImageId(GetNextImageByImageIdRequest) returns (GetNextImageByImageIdResponse) {}
 }
@@ -24,21 +24,21 @@ message Argument {
     string value = 2;
 }
 
-message UnregisterImgTransServiceRequest {
+message UnregisterImageTransServiceRequest {
     int64 connectId = 1;
 }
 
-message UnregisterImgTransServiceResponse {
+message UnregisterImageTransServiceResponse {
     CustomResponse response = 1;
 }
 
-message RegisterImgTransServiceRequest {
-    string imgType = 1;
+message RegisterImageTransServiceRequest {
+    string sourceType = 1;
     repeated Argument args = 2;
     int64 loaderArgsHash = 3;
 }
 
-message RegisterImgTransServiceResponse {
+message RegisterImageTransServiceResponse {
     CustomResponse response = 1;
     int64 loaderArgsHash = 2;
     int64 connectId = 3;
