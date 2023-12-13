@@ -35,11 +35,13 @@ message UnregisterImgTransServiceResponse {
 message RegisterImgTransServiceRequest {
     string imgType = 1;
     repeated Argument args = 2;
+    int64 loaderArgsHash = 3;
 }
 
 message RegisterImgTransServiceResponse {
     CustomResponse response = 1;
-    int64 connectId = 2;
+    int64 loaderArgsHash = 2;
+    int64 connectId = 3;
 }
 
 message GetImageByImageIdRequest {
