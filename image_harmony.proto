@@ -26,13 +26,15 @@ message Argument {
 
 // 图像 request
 message CustomImageRequest {
+    // 图片ID 如果该参数不为0则调取历史记录
+    int64 imageId = 1;
     // 图像压缩格式
-    string format = 1;
+    string format = 2;
     // 图像压缩参数
-    repeated int32 params = 2;
+    repeated int32 params = 3;
     // 图像的期望大小
-    int32 expectedW = 3;
-    int32 expectedH = 4;
+    int32 expectedW = 4;
+    int32 expectedH = 5;
 }
 
 // 图像 response
@@ -66,9 +68,7 @@ message RegisterImageTransServiceResponse {
 message GetImageByImageIdRequest {
     // 连接ID
     int64 connectId = 1;
-    // 图片ID 如果该参数不为0则调取历史记录
-    int64 imageId = 2;
-    CustomImageRequest imageRequest = 3;
+    CustomImageRequest imageRequest = 2;
 }
 
 message GetImageByImageIdResponse {
@@ -79,9 +79,7 @@ message GetImageByImageIdResponse {
 message GetNextImageByImageIdRequest {
     // 连接ID
     int64 connectId = 1;
-    // 图片ID 如果该参数不为0则调取历史记录
-    int64 imageId = 2;
-    CustomImageRequest imageRequest = 3;
+    CustomImageRequest imageRequest = 2;
     // 不获取图像，只获取ID
     bool onlyImageId = 4;
 }
