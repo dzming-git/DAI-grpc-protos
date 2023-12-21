@@ -29,6 +29,7 @@ message InformPreviousServiceInfoRequest {
     string preServiceName = 2;
     string preServiceIp = 3;
     string preServicePort = 4;
+    repeated Argument args = 5;
 }
 
 message InformPreviousServiceInfoResponse {
