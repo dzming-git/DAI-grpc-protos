@@ -3,7 +3,7 @@ syntax = "proto3";
 package imageRenderer;
 
 service Communicate {
-    rpc getLatestImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
+    rpc getImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
 }
 
 message NullRequest {}
