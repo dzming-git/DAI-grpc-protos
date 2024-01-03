@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package imageRenderer;
+
+service Communicate {
+    rpc getLatestImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
+}
+
+message NullRequest {}
+message NullResponse {}
+
+// 每次通信的状态
+message CustomResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+// KV格式参数
+message Argument {
+    string key = 1;
+    string value = 2;
+}
+
+// 图像 request
+message CustomImageRequest {
+    // 图片ID 如果该参数不为0则调取历史记录
+    int64 imageId = 1;
+    // 不获取图像
+    bool noImageBuffer = 2;
+    // 图像压缩格式
+    string format = 3;
+    // 图像压缩参数
+    repeated int32 params = 4;
+    // 图像的期望大小
+    int32 expectedW = 5;
+    int32 expectedH = 6;
+}
+
+// 图像 response
+message CustomImageResponse {
+    int32 width = 1;
+    int32 height = 2;
+    int64 imageId = 3;
+    bytes buffer = 4;
+}
+
+message GetImageByImageIdRequest {
+    // 连接ID
+    int64 connectId = 1;
+    CustomImageRequest imageRequest = 2;
+}
+
+message GetImageByImageIdResponse {
+    CustomResponse response = 1;
+    CustomImageResponse imageResponse = 2;
+}
