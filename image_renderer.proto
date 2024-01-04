@@ -46,7 +46,7 @@ message CustomImageResponse {
 
 message GetImageByImageIdRequest {
     // 连接ID
-    int64 connectId = 1;
+    int64 taskId = 1;
     CustomImageRequest imageRequest = 2;
 }
 
