@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package targetTracking;
+
+service Communicate {
+    rpc getResultByImageId(GetResultByImageIdRequest) returns (GetResultByImageIdResponse) {}
+}
+
+message NullRequest {}
+message NullResponse {}
+
+// 每次通信的状态
+message CustomResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+message Result {
+    int32 id = 1;
+    double x1 = 3;
+    double y1 = 4;
+    double x2 = 5;
+    double y2 = 6;
+}
+
+message GetResultByImageIdRequest {
+    int64 taskId = 1;
+    int64 imageId = 2;
+    // 如果wait为true且imageId找不到，则尝试去向图像源申请该图像并检测，等待检测结束返回结果
+    bool wait = 3;
+}
+
+message GetResultByImageIdResponse {
+    CustomResponse response = 1;
+    repeated Result results = 2;
+}
