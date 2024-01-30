@@ -15,12 +15,16 @@ message CustomResponse {
   string message = 2;
 }
 
-message Result {
-    int32 id = 1;
+message BoundingBox {
     double x1 = 3;
     double y1 = 4;
     double x2 = 5;
     double y2 = 6;
+}
+
+message Result {
+    int32 id = 1;
+    repeated BoundingBox bboxs = 2;
 }
 
 message GetResultByImageIdRequest {
