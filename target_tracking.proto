@@ -16,10 +16,10 @@ message CustomResponse {
 }
 
 message BoundingBox {
-    double x1 = 3;
-    double y1 = 4;
-    double x2 = 5;
-    double y2 = 6;
+    double x1 = 1;
+    double y1 = 2;
+    double x2 = 3;
+    double y2 = 4;
 }
 
 message Result {
