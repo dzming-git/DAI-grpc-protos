@@ -24,7 +24,8 @@ message BoundingBox {
 
 message Result {
     int32 id = 1;
-    repeated BoundingBox bboxs = 2;
+    string label = 2;
+    repeated BoundingBox bboxs = 3;
 }
 
 message GetResultByImageIdRequest {
