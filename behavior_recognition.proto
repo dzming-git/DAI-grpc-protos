@@ -2,8 +2,15 @@ syntax = "proto3";
 
 package behaviorRecognition;
 
+// slowfast算法需要参考图像前后数帧，所以无法进行等待获取结果
+// 解决方法：先告知图像ID，再获取最新的检测结果
+// 妥协：bbox的label信息会落后1-2秒
+
 service Communicate {
+    // 告知图像ID
+    rpc informImageId(InformImageIdRequest) returns (InformImageIdResponse) {}
     rpc getResultByImageId(GetResultByImageIdRequest) returns (GetResultByImageIdResponse) {}
+    rpc getLatestResult(GetLatestResultRequest) returns (GetLatestResultResponse) {}
 }
 
 message NullRequest {}
@@ -28,14 +35,30 @@ message Result {
     double y2 = 5;
 }
 
+message InformImageIdRequest {
+    int64 taskId = 1;
+    int64 imageId = 2;
+}
+
+message InformImageIdResponse {
+    CustomResponse response = 1;
+}
+
 message GetResultByImageIdRequest {
     int64 taskId = 1;
     int64 imageId = 2;
-    // 如果wait为true且imageId找不到，则尝试去向图像源申请该图像并检测，等待检测结束返回结果
-    bool wait = 3;
 }
 
 message GetResultByImageIdResponse {
+    CustomResponse response = 1;
+    repeated Result results = 2;
+}
+
+message GetLatestResultRequest {
+    int64 taskId = 1;
+}
+
+message GetLatestResultResponse {
     CustomResponse response = 1;
     repeated Result results = 2;
 }
