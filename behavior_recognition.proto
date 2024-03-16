@@ -23,17 +23,17 @@ message CustomResponse {
 }
 
 message LabelInfo {
-    int32 personId = 1;
-    string label = 2;
-    double confidence = 3;
+    string label = 1;
+    double confidence = 2;
 }
 
 message Result {
     repeated LabelInfo labelInfos = 1;
-    double x1 = 2;
-    double y1 = 3;
-    double x2 = 4;
-    double y2 = 5;
+    int32 personId = 2;
+    double x1 = 3;
+    double y1 = 4;
+    double x2 = 5;
+    double y2 = 6;
 }
 
 message InformImageIdRequest {
