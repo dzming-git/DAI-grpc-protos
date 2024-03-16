@@ -23,8 +23,9 @@ message CustomResponse {
 }
 
 message LabelInfo {
-    string label = 1;
-    double confidence = 2;
+    int32 personId = 1;
+    string label = 2;
+    double confidence = 3;
 }
 
 message Result {
