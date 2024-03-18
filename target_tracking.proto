@@ -33,6 +33,8 @@ message GetResultByImageIdRequest {
     int64 imageId = 2;
     // 如果wait为true且imageId找不到，则尝试去向图像源申请该图像并检测，等待检测结束返回结果
     bool wait = 3;
+    // 只获取最后一个bbox
+    bool onlyTheLatest = 4;
 }
 
 message GetResultByImageIdResponse {
