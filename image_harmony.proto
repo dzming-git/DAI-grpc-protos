@@ -3,9 +3,9 @@ syntax = "proto3";
 package imageHarmony;
 
 service Communicate {
-    rpc initImageTransService(InitImageTransServiceRequest) returns (InitImageTransServiceResponse) {}
-    rpc connectImageTransService(ConnectImageTransServiceRequest) returns (ConnectImageTransServiceResponse) {}
-    rpc disconnectImageTransService(DisconnectImageTransServiceRequest) returns (DisconnectImageTransServiceResponse) {}
+    rpc initImageLoaderService(InitImageLoaderServiceRequest) returns (InitImageLoaderServiceResponse) {}
+    rpc connectImageLoaderService(ConnectImageLoaderServiceRequest) returns (ConnectImageLoaderServiceResponse) {}
+    rpc disconnectImageLoaderService(DisconnectImageLoaderServiceRequest) returns (DisconnectImageLoaderServiceResponse) {}
     rpc getImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
     rpc getNextImageByImageId(GetNextImageByImageIdRequest) returns (GetNextImageByImageIdResponse) {}
 }
@@ -48,32 +48,32 @@ message CustomImageResponse {
     bytes buffer = 4;
 }
 
-message InitImageTransServiceRequest {
+message InitImageLoaderServiceRequest {
     string sourceType = 1;
     repeated Argument args = 2;
     // 是否独占（新建加载器）
     bool isUnique = 3;
 }
 
-message InitImageTransServiceResponse {
+message InitImageLoaderServiceResponse {
     CustomResponse response = 1;
     int64 loaderArgsHash = 2;
 }
 
-message ConnectImageTransServiceRequest {
+message ConnectImageLoaderServiceRequest {
     int64 loaderArgsHash = 1;
 }
 
-message ConnectImageTransServiceResponse {
+message ConnectImageLoaderServiceResponse {
     CustomResponse response = 1;
     int64 connectionId = 2;
 }
 
-message DisconnectImageTransServiceRequest {
+message DisconnectImageLoaderServiceRequest {
     int64 connectionId = 1;
 }
 
-message DisconnectImageTransServiceResponse {
+message DisconnectImageLoaderServiceResponse {
     CustomResponse response = 1;
 }
 
