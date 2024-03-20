@@ -3,8 +3,9 @@ syntax = "proto3";
 package imageHarmony;
 
 service Communicate {
-    rpc registerImageTransService(RegisterImageTransServiceRequest) returns (RegisterImageTransServiceResponse) {}
-    rpc unregisterImageTransService(UnregisterImageTransServiceRequest) returns (UnregisterImageTransServiceResponse) {}
+    rpc initImageTransService(InitImageTransServiceRequest) returns (InitImageTransServiceResponse) {}
+    rpc connectImageTransService(ConnectImageTransServiceRequest) returns (ConnectImageTransServiceResponse) {}
+    rpc disconnectImageTransService(DisconnectImageTransServiceRequest) returns (DisconnectImageTransServiceResponse) {}
     rpc getImageByImageId(GetImageByImageIdRequest) returns (GetImageByImageIdResponse) {}
     rpc getNextImageByImageId(GetNextImageByImageIdRequest) returns (GetNextImageByImageIdResponse) {}
 }
@@ -47,31 +48,38 @@ message CustomImageResponse {
     bytes buffer = 4;
 }
 
-message RegisterImageTransServiceRequest {
+message InitImageTransServiceRequest {
     string sourceType = 1;
     repeated Argument args = 2;
-    int64 loaderArgsHash = 3;
     // 是否独占（新建加载器）
-    bool isUnique = 4;
+    bool isUnique = 3;
 }
 
-message RegisterImageTransServiceResponse {
+message InitImageTransServiceResponse {
     CustomResponse response = 1;
     int64 loaderArgsHash = 2;
-    int64 connectId = 3;
 }
 
-message UnregisterImageTransServiceRequest {
-    int64 connectId = 1;
+message ConnectImageTransServiceRequest {
+    int64 loaderArgsHash = 1;
 }
 
-message UnregisterImageTransServiceResponse {
+message ConnectImageTransServiceResponse {
+    CustomResponse response = 1;
+    int64 connectionId = 2;
+}
+
+message DisconnectImageTransServiceRequest {
+    int64 connectionId = 1;
+}
+
+message DisconnectImageTransServiceResponse {
     CustomResponse response = 1;
 }
 
 message GetImageByImageIdRequest {
     // 连接ID
-    int64 connectId = 1;
+    int64 connectionId = 1;
     CustomImageRequest imageRequest = 2;
 }
 
@@ -82,7 +90,7 @@ message GetImageByImageIdResponse {
 
 message GetNextImageByImageIdRequest {
     // 连接ID
-    int64 connectId = 1;
+    int64 connectionId = 1;
     CustomImageRequest imageRequest = 2;
 }
 
