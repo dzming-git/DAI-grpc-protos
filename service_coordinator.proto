@@ -28,7 +28,7 @@ message InformPreviousServiceInfoRequest {
     int64 taskId = 1;
     string preServiceName = 2;
     string preServiceIp = 3;
-    string preServicePort = 4;
+    int32 preServicePort = 4;
     repeated Argument args = 5;
 }
 
